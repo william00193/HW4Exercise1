@@ -12,21 +12,18 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 
 
+
+//Naming the Tag as 'MainActivty'
 private const val TAG = "MainActivity"
 
 
 class MainActivity : AppCompatActivity() {
 
 
-    private lateinit var binding: ActivityMainBinding
+
+//Giving a name to my ViewModel that will be referenced from another page later
     private val quizViewModel: QuizViewModel by viewModels()
-
-
-
-
-
-
-
+    private lateinit var binding: ActivityMainBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,11 +31,12 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
+//Binding and layout Inflator stayed the same as the last few activities
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
+//Logs that name and define output in the LogCat
         Log.d(TAG, "onCreate (Bundle?) called")
         Log.d(TAG, "Got a QuizViewModel: $quizViewModel")
 
@@ -67,21 +65,26 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.questionTextView.setOnClickListener {
-//            currentIndex = (currentIndex + 1) % questionBank.size
 
+//currentIndex = (currentIndex + 1) % questionBank.size
+
+//New method of progressing to next question
+//Defined in QuizViewModel.kt file
          quizViewModel.moveNext()
-            //deleted updateQuestion listener
+
         }
 
 
 
 
         binding.previousButton.setOnClickListener {
+
 //currentIndex = (currentIndex - 1) % questionBank.size
-            //deleted updateQuestion listener
 
-
+//New method of moving back a question
+//Defined in QuizViewModel.kt file
             quizViewModel.movePrevious()
+
         }
 
 
@@ -89,13 +92,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.nextButton.setOnClickListener {
 
-//            currentIndex = (currentIndex + 1) % questionBank.size
+//currentIndex = (currentIndex + 1) % questionBank.size
 
             binding.falseButton.isEnabled = true
             binding.trueButton.isEnabled = true
 
-
-
+//New method of moving forward a question
+//Defined in QuizViewModel.kt file
             quizViewModel.moveNext()
 
 //(New) variable Increment of questionCount,
@@ -116,11 +119,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-
-
-//
-//    //(New) I have now moved the condition to the updateQuestion function
+////(New) I have now moved the condition to the updateQuestion function
 ////Things seem to be working correctly now, thanks for the help professor!
 //    private fun showPoints() {
 //
@@ -184,11 +183,14 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    //Function to check if user answer is correct
+//Function to check if user answer is correct
     private fun checkAnswer(userAnswer: Boolean) {
 
 
-//        val correctAnswer = questionBank[currentIndex].answer
+//val correctAnswer = questionBank[currentIndex].answer
+
+
+//New way of checking if user answer is correct using QuizViewModel.kt
         val correctAnswer = quizViewModel.currentQuestionAnswer
 
 
@@ -198,6 +200,10 @@ class MainActivity : AppCompatActivity() {
         } else {
             R.string.incorrect_toast
         }
+
+
+    }
+
 
 
 ////(New) Added 9/19 to take into consideration left out question
@@ -212,8 +218,6 @@ class MainActivity : AppCompatActivity() {
 //            .show()
 
 
-
-    }
 
 
 
