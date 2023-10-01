@@ -1,6 +1,7 @@
 package com.example.hw4eercise1
 
 
+
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -18,23 +19,19 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle):ViewModel() 
 
 
 
+
 //    init {
-//
-//        Log.d(TAG, "QuizViewModel instance created")
-//
+//        Log.d(TAG, "Quiz View Model Instance Created")
 //    }
 //
-//    override fun onCleared(){
+//    override fun onCleared() {
 //        super.onCleared()
 //
-//        Log.d(TAG, "QuizViewModel instance about to be destroyed")
+//        Log.d(TAG, "Quiz View Model is about to be Created")
+//
 //    }
 
-
-
-
-
-//Data from previous activity that is now saved as the current state and view
+    //Data from previous activity that is now saved as the current state and view
     private val questionBank = listOf(
         question(R.string.question_australia, true),
         question(R.string.question_oceans, true),
@@ -45,50 +42,37 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle):ViewModel() 
     )
 
 
-
-
 //Defining currentIndex as an Integer
 //Getting the saved state, and getting the current index key previously defined
     private var currentIndex: Int
-    get() = savedStateHandle.get(CURRENT_INDEX_KEY)?:0
-    set(value) = savedStateHandle.set(CURRENT_INDEX_KEY, value)
+        get() = savedStateHandle.get(CURRENT_INDEX_KEY) ?: 0
+        set(value) = savedStateHandle.set(CURRENT_INDEX_KEY, value)
 
 
-
-//Other variables added to ViewModel from the  that were used in MainActivty
-    private var questionCount = 0
-    private var numberCorrect = 0
-
-
-
-//Defining currentQuestionAnswer index as True/False
+    //Defining currentQuestionAnswer index as True/False
 //Getting this variable from current index of question banks answer section
     val currentQuestionAnswer: Boolean
-    get() = questionBank[currentIndex].answer
+        get() = questionBank[currentIndex].answer
 
 
-
-//Defining currentQuestionText as an integer
+    //Defining currentQuestionText as an integer
 //Getting this variable from the current index of question banks Text section
     val currentQuestionText: Int
-    get() = questionBank[currentIndex].textResId
+        get() = questionBank[currentIndex].textResId
 
 
-
-
-//Newly defined function that allows the user to move forward a questions, and progress the question bank by 1
+    //Newly defined function that allows the user to move forward a questions, and progress the question bank by 1
 //Also incrementing the current questionCount by 1
     fun moveNext() {
         currentIndex = (currentIndex + 1 % questionBank.size)
-        questionCount++
     }
-
+}
 
 
 //Newly defined function that allows the user to move back a questions, and progress the question bank by 1
 //Also incrementing the current questionCount by 1
-    fun movePrevious() {
-        currentIndex = (currentIndex - 1 % questionBank.size)
-    }
-
-}
+//    fun movePrevious() {
+//        currentIndex = (currentIndex - 1 % questionBank.size)
+//    }
+//
+//}

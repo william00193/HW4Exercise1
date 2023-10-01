@@ -13,6 +13,8 @@ import com.google.android.material.snackbar.Snackbar
 
 
 
+
+
 //Naming the Tag as 'MainActivty'
 private const val TAG = "MainActivity"
 
@@ -66,33 +68,27 @@ class MainActivity : AppCompatActivity() {
 
         binding.questionTextView.setOnClickListener {
 
-//currentIndex = (currentIndex + 1) % questionBank.size
 
-//New method of progressing to next question
-//Defined in QuizViewModel.kt file
          quizViewModel.moveNext()
 
         }
 
 
 
-
-        binding.previousButton.setOnClickListener {
-
-//currentIndex = (currentIndex - 1) % questionBank.size
-
-//New method of moving back a question
-//Defined in QuizViewModel.kt file
-            quizViewModel.movePrevious()
-
-        }
+//Previous button that is not going to be used in this activity
+//        binding.previousButton.setOnClickListener {
+//
+//
+//            quizViewModel.movePrevious()
+//
+//        }
 
 
 
 
         binding.nextButton.setOnClickListener {
 
-//currentIndex = (currentIndex + 1) % questionBank.size
+
 
             binding.falseButton.isEnabled = true
             binding.trueButton.isEnabled = true
@@ -101,8 +97,6 @@ class MainActivity : AppCompatActivity() {
 //Defined in QuizViewModel.kt file
             quizViewModel.moveNext()
 
-//(New) variable Increment of questionCount,
-//            questionCount++
 
             updateQuestion()
 
@@ -111,52 +105,7 @@ class MainActivity : AppCompatActivity() {
 
         updateQuestion()
 
-
-
-
-
     }
-
-
-
-////(New) I have now moved the condition to the updateQuestion function
-////Things seem to be working correctly now, thanks for the help professor!
-//    private fun showPoints() {
-//
-//        val percentage = (numberCorrect.toDouble() / questionBank.size) * 100
-//        val percentageNew = "%.1f".format(percentage)
-//
-//
-//
-////(New) I will change this out when it comes time to turn things In
-////There is to long of a delay when testing
-////        Toast.makeText(
-////            this,
-////            "$percentageNew%",
-////            Toast.LENGTH_SHORT
-////        )   //Showing the toast
-////
-////            .show()
-//
-//
-//
-//
-////(New)When If statement is working will display a green Snackbar
-//        val snackBar = Snackbar.make (
-//            findViewById(android.R.id.content),
-//            "$percentageNew%",
-//            Snackbar.LENGTH_SHORT
-//        )
-//
-//        snackBar.setTextColor(Color.BLACK)
-//        snackBar.setBackgroundTint(Color.GREEN)
-//        snackBar.show()
-//
-//    }
-
-
-
-
 
 
 
@@ -164,30 +113,18 @@ class MainActivity : AppCompatActivity() {
 
     //Update question function
     private fun updateQuestion() {
-//        val questionTextResId = questionBank[currentIndex].textResId
+
         val questionTextResId = quizViewModel.currentQuestionText
+
         binding.questionTextView.setText(questionTextResId)
-
-
 
     }
 
 
 
 
-
-
-
-
-
-
-
-
 //Function to check if user answer is correct
     private fun checkAnswer(userAnswer: Boolean) {
-
-
-//val correctAnswer = questionBank[currentIndex].answer
 
 
 //New way of checking if user answer is correct using QuizViewModel.kt
@@ -203,46 +140,6 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
-
-
-////(New) Added 9/19 to take into consideration left out question
-//        if (userAnswer == correctAnswer)
-//
-//
-//            numberCorrect++
-//
-//
-//
-//        Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
-//            .show()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     //Logs for the first exercise
