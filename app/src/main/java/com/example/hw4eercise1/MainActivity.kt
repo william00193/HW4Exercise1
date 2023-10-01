@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    //Update question function
+//Update question function
     private fun updateQuestion() {
 
         val questionTextResId = quizViewModel.currentQuestionText
@@ -142,7 +142,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    //Logs for the first exercise
+//Logs for the first exercise
     override fun onStart() {
         super.onStart()
         Log.d(TAG, "onStart() called")
